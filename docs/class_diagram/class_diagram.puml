@@ -1,0 +1,66 @@
+@startuml{rss-oop-sample.png}
+
+
+Class RssService {
+    + convert_feeds()
+}
+
+Interface FeedConverter {
+    + convert_title()
+    + convert_summary()
+    + convert_published()
+}
+
+Interface FeedUriInput {
+    + get_all()
+}
+
+Interface FeedOutput {
+    + output()
+}
+
+Interface FeedParser {
+    + parse()
+}
+
+Class FeedItem {
+    + convert()
+}
+
+Class ShortAndJapaneseConverter {
+    + convert_title()
+    + convert_summary()
+    + convert_published()
+}
+
+Class ConsoleInput {
+    + get_all()
+}
+
+Class ConsoleOutput {
+    + output()
+}
+
+Class ConsoleOutputTitleOnly {
+    + output()
+}
+
+Class WrappedFeedParser {
+    + parse()
+}
+
+FeedConverter <|.. ShortAndJapaneseConverter
+FeedUriInput <|.. ConsoleInput
+FeedOutput <|.. ConsoleOutput
+FeedOutput <|.. ConsoleOutputTitleOnly
+FeedParser <|.. WrappedFeedParser
+RssService o.. FeedConverter
+RssService o.. FeedUriInput
+RssService o.. FeedOutput
+RssService o.. FeedParser
+FeedItem <.. FeedParser
+FeedItem <.. FeedOutput
+FeedConverter <.. FeedItem
+
+
+@enduml
